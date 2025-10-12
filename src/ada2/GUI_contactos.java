@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI_contactos extends JFrame {
 
@@ -76,5 +79,13 @@ public class GUI_contactos extends JFrame {
 		Tf_tel.setBounds(297, 131, 109, 19);
 		contentPane.add(Tf_tel);
 		Tf_tel.setColumns(10);
+		
+		JButton btnBuscarBrisa = new JButton("Buscar");
+		btnBuscarBrisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBuscarBrisa.setBounds(297, 185, 85, 21);
+		contentPane.add(btnBuscarBrisa);
 	}
 }
