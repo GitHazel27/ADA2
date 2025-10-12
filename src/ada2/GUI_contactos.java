@@ -8,8 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI_contactos extends JFrame {
 
@@ -18,6 +23,7 @@ public class GUI_contactos extends JFrame {
 	ArrayList<Contactos> contactos = new ArrayList<>();
 	private JTextField Tf_nombre;
 	private JTextField Tf_tel;
+	int indice = 0;
 
 	/**
 	 * Launch the application.
@@ -76,5 +82,72 @@ public class GUI_contactos extends JFrame {
 		Tf_tel.setBounds(297, 131, 109, 19);
 		contentPane.add(Tf_tel);
 		Tf_tel.setColumns(10);
+		
+		JButton bt_agregar = new JButton("Agregar");
+		bt_agregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			String nombre = Tf_nombre.getText();
+			String tel = Tf_tel.getText();
+			int num = contactos.size() + 1;
+			String foto = "";
+			if (num == 1) {
+			    foto = "imagenes/Contacto1.png";
+			} else if (num == 2) {
+			    foto = "imagenes/Contacto2.png";
+			} else if (num == 3) {
+			    foto = "imagenes/Contacto3.png";
+			} else if (num == 4) {
+			    foto = "imagenes/Contacto4.png";
+			} else if (num == 5) {
+			    foto = "imagenes/Contacto5.png";
+			}
+			System.out.println(num);
+			contactos.add(new Contactos(num,nombre,tel,foto));
+			JOptionPane.showMessageDialog(null,"Contacto guardado");
+			Tf_nombre.setText("");
+			Tf_tel.setText("");
+			}
+		});
+		bt_agregar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		bt_agregar.setBounds(281, 182, 109, 21);
+		contentPane.add(bt_agregar);
+		
+		JButton Derecha = new JButton(">>");
+		Derecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (contactos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Aún no hay contactos");
+					return;
+				}
+		        if (indice < contactos.size() - 1) {
+		            indice++;
+		        }
+		        Tf_nombre.setText(contactos.get(indice).getNomb());
+		        Tf_tel.setText(contactos.get(indice).getTel());
+		        Label_foto.setIcon(new ImageIcon(contactos.get(indice).getIma()));
+		    }
+		});
+		Derecha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Derecha.setBounds(394, 182, 64, 21);
+		contentPane.add(Derecha);
+		
+		JButton izquierda = new JButton("<<");
+		izquierda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (contactos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Aún no hay contactos");
+					return;
+				}
+		        if (indice > 0) {
+		            indice--;
+		        }
+		        Tf_nombre.setText(contactos.get(indice).getNomb());
+		        Tf_tel.setText(contactos.get(indice).getTel());
+		        Label_foto.setIcon(new ImageIcon(contactos.get(indice).getIma()));
+		    }
+		});
+		izquierda.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		izquierda.setBounds(213, 182, 64, 21);
+		contentPane.add(izquierda);
 	}
 }
