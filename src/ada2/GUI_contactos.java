@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -83,6 +85,23 @@ public class GUI_contactos extends JFrame {
 		JButton btnBuscarBrisa = new JButton("Buscar");
 		btnBuscarBrisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String sBuscar = JOptionPane.showInputDialog("Buscar");
+				if (sBuscar != null) {
+				    boolean encontrado = false;
+				    for (int i = 0; i < contactos.size(); i++) {
+				        if (contactos.get(i).getNomb().equalsIgnoreCase(sBuscar)) {
+				            String datos = "Nombre: " + contactos.get(i).getNomb() + 
+				                           "\nTeléfono: " + contactos.get(i).getTel();
+				            JOptionPane.showMessageDialog(null, datos, "Contacto Encontrado", JOptionPane.INFORMATION_MESSAGE);
+				            encontrado = true;
+				            break;
+				        }
+				    }
+
+				    if (!encontrado) {
+				        JOptionPane.showMessageDialog(null, "El contacto no fue encontrado");
+				    }
+				}
 			}
 		});
 		btnBuscarBrisa.setBounds(297, 185, 85, 21);
