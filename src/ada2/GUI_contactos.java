@@ -85,26 +85,27 @@ public class GUI_contactos extends JFrame {
 		JButton btnBuscarBrisa = new JButton("Buscar");
 		btnBuscarBrisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sBuscar = JOptionPane.showInputDialog("Buscar");
+				//Boton "Buscar" realizado por Brisa Narvaez.
+				String sBuscar = JOptionPane.showInputDialog("Buscar");//Solicita al usuario el nombre del contacto que desea encontrar
 				if (sBuscar != null) {
 				    boolean encontrado = false;
-				    for (int i = 0; i < contactos.size(); i++) {
+				    for (int i = 0; i < contactos.size(); i++) {//recorre la lista comparando cada nombre con el solicitado.
 				        if (contactos.get(i).getNomb().equalsIgnoreCase(sBuscar)) {
 				            String datos = "Nombre: " + contactos.get(i).getNomb() + 
 				                           "\nTeléfono: " + contactos.get(i).getTel();
 				            JOptionPane.showMessageDialog(null, datos, "Contacto Encontrado", JOptionPane.INFORMATION_MESSAGE);
-				            encontrado = true;
+				            encontrado = true;//se muestra los datos del contacto si existe en la lista
 				            break;
 				        }
 				    }
 
 				    if (!encontrado) {
-				        JOptionPane.showMessageDialog(null, "El contacto no fue encontrado");
+				        JOptionPane.showMessageDialog(null, "El contacto no fue encontrado");//si no encontro el contacto se muestra este mensaje
 				    }
 				}
 			}
 		});
-		btnBuscarBrisa.setBounds(297, 185, 85, 21);
+		btnBuscarBrisa.setBounds(493, 15, 85, 21);
 		contentPane.add(btnBuscarBrisa);
 	}
 }
