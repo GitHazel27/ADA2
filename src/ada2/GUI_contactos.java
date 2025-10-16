@@ -13,10 +13,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JList;
+
 
 public class GUI_contactos extends JFrame {
 
@@ -49,7 +47,7 @@ public class GUI_contactos extends JFrame {
 	 */
 	public GUI_contactos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 692, 340);
+		setBounds(100, 100, 624, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -161,5 +159,33 @@ public class GUI_contactos extends JFrame {
 		izquierda.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		izquierda.setBounds(213, 182, 64, 21);
 		contentPane.add(izquierda);
+		
+
+		JButton btnBuscarBrisa = new JButton("Buscar");
+		btnBuscarBrisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Boton "Buscar" realizado por Brisa Narvaez.
+				String sBuscar = JOptionPane.showInputDialog("Buscar");//Solicita al usuario el nombre del contacto que desea encontrar
+				if (sBuscar != null) {
+				    boolean encontrado = false;
+				    for (int i = 0; i < contactos.size(); i++) {//recorre la lista comparando cada nombre con el solicitado.
+				        if (contactos.get(i).getNomb().equalsIgnoreCase(sBuscar)) {
+				            String datos = "Nombre: " + contactos.get(i).getNomb() + 
+				                           "\nTeléfono: " + contactos.get(i).getTel();
+				            JOptionPane.showMessageDialog(null, datos, "Contacto Encontrado", JOptionPane.INFORMATION_MESSAGE);
+				            encontrado = true;//se muestra los datos del contacto si existe en la lista
+				            break;
+				        }
+				    }
+
+				    if (!encontrado) {
+				        JOptionPane.showMessageDialog(null, "El contacto no fue encontrado");//si no encontro el contacto se muestra este mensaje
+				    }
+				}
+			}
+		});
+		btnBuscarBrisa.setBounds(493, 15, 85, 21);
+		contentPane.add(btnBuscarBrisa);
+
 	}
 }
