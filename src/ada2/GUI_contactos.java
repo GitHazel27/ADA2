@@ -3,6 +3,7 @@ package ada2;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class GUI_contactos extends JFrame {
 
@@ -24,6 +26,7 @@ public class GUI_contactos extends JFrame {
 	private JTextField Tf_nombre;
 	private JTextField Tf_tel;
 	int indice = 0;
+	int contador = 0;
 
 	/**
 	 * Launch the application.
@@ -46,7 +49,7 @@ public class GUI_contactos extends JFrame {
 	 */
 	public GUI_contactos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 624, 340);
+		setBounds(100, 100, 692, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -83,9 +86,14 @@ public class GUI_contactos extends JFrame {
 		contentPane.add(Tf_tel);
 		Tf_tel.setColumns(10);
 		
+		//Hazel Silva: Botón de agregar. Agrega al arraylist un nuevo contacto, en el cual
+		//se le asigna el nombre, teléfono, número de contacto y la dirección de la foto.
+		//Lo guarda y deja en blanco los textfields.
+		//Agrega al JList
 		JButton bt_agregar = new JButton("Agregar");
 		bt_agregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 			String nombre = Tf_nombre.getText();
 			String tel = Tf_tel.getText();
 			int num = contactos.size() + 1;
@@ -101,8 +109,10 @@ public class GUI_contactos extends JFrame {
 			} else if (num == 5) {
 			    foto = "imagenes/Contacto5.png";
 			}
-			System.out.println(num);
 			contactos.add(new Contactos(num,nombre,tel,foto));
+			String contacto = Integer.toString(num)+ ". "+ Tf_nombre.getText() + " " + Tf_tel.getText();
+			JLNombres.add(contador, contacto);
+			contador++;
 			JOptionPane.showMessageDialog(null,"Contacto guardado");
 			Tf_nombre.setText("");
 			Tf_tel.setText("");
@@ -112,6 +122,7 @@ public class GUI_contactos extends JFrame {
 		bt_agregar.setBounds(281, 182, 109, 21);
 		contentPane.add(bt_agregar);
 		
+		//	Hazel silva, recorre el arraylist a la derecha
 		JButton Derecha = new JButton(">>");
 		Derecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,6 +142,7 @@ public class GUI_contactos extends JFrame {
 		Derecha.setBounds(394, 182, 64, 21);
 		contentPane.add(Derecha);
 		
+		//Hazel Silva, recorre el arraylist a la izquierda
 		JButton izquierda = new JButton("<<");
 		izquierda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -25,5 +25,9 @@ public class Contactos {
 	public String getIma() {
 		return imagen;
 	}
+	@Override
+	public String toString() {
+		return nombre + telefono;
+	}
 
 }
